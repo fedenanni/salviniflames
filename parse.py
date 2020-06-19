@@ -3,7 +3,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 scope = ['https://spreadsheets.google.com/feeds',
          'https://www.googleapis.com/auth/drive']
-credentials = Credentials.from_service_account_file('**********.json', scopes=scope)
+credentials = Credentials.from_service_account_file('sheet-274815-b5805997d72c.json', scopes=scope)
 gc = gspread.authorize(credentials)
 sh = gc.open_by_url('https://docs.google.com/spreadsheets/d/1TjRUke8rh-ohRE6b0IPcTffGHGl4HIQZXUUYYAehz0o/edit?usp=sharing')
 worksheet_list = sh.worksheets()
