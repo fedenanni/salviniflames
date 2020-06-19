@@ -6,6 +6,7 @@ import spacy
 import time
 import tweepy
 import os
+nltk.download('punkt')
 
 scope = ['https://spreadsheets.google.com/feeds',
          'https://www.googleapis.com/auth/drive']
