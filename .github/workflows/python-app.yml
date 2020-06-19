@@ -22,6 +22,11 @@ jobs:
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         python -m spacy download it
+    - name: download secret
+      env:
+        SHEET_JSON: ${{ secrets.SHEET_JSON }}
+      run: |
+        echo "$SHEET_JSON" > sheet-274815-b5805997d72c.json
     - name: salvini parser
       run: |
           python parse.py
