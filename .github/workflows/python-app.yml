@@ -28,6 +28,11 @@ jobs:
       run: |
         echo "$SHEET_JSON" > sheet-274815-b5805997d72c.json
     - name: salvini parser
+      env:
+        TWITTER_API_KEY: ${{ secrets.TWITTER_API_KEY }}
+        TWITTER_API_SECRET: ${{ secrets.TWITTER_API_SECRET }}
+        TWITTER_TOKEN: ${{ secrets.TWITTER_TOKEN }}
+        TWITTER_TOKEN_SECRET: ${{ secrets.TWITTER_TOKEN_SECRET }}
       run: |
           python parse.py
 
