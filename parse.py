@@ -1,6 +1,12 @@
-# Import Google Spreadsheet
 import gspread
 from google.oauth2.service_account import Credentials
+import re
+import nltk
+import spacy
+import time
+import tweepy
+import os
+
 scope = ['https://spreadsheets.google.com/feeds',
          'https://www.googleapis.com/auth/drive']
 credentials = Credentials.from_service_account_file('sheet-274815-b5805997d72c.json', scopes=scope)
@@ -43,15 +49,9 @@ dict_based_sent("Bimbi, anziani e famiglie messe in attesa, priorità alle sanat
 
 # Parse Spreadsheet and tweet
 
-import re
-import nltk
-import spacy
-import time
-import tweepy
-
 # Authenticate to Twitter
-auth = tweepy.OAuthHandler("*****", "*****")
-auth.set_access_token("*****", "*****")
+auth = tweepy.OAuthHandler(os.environ['TWITTER_API_KEY'], os.environ['TWITTER_API_SECRET'])
+auth.set_access_token(os.environ['TWITTER_TOKEN'], os.environ['TWITTER_TOKEN_SECRET'])
 
 # Create API object
 api = tweepy.API(auth)
