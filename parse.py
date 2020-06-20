@@ -68,7 +68,7 @@ w = open('salvinisays.tsv', 'a')
 f = open('salvinisays.tsv', 'r')
 lines = f.readlines()
 
-for i in range(1, 10):
+for i in range(100, 102):
     time.sleep(2)
     row = sheet.row_values(str(i))
     sentence = row[2]
