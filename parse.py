@@ -117,10 +117,14 @@ for i in range(1, 10):
 
                     if isTweeted == False:
                         # Without Mention
-                        api.update_status(tweet + ' https://twitter.com/matteosalvinimi/status/' + str(row[10]))
+                        #api.update_status(tweet + ' https://twitter.com/matteosalvinimi/status/' + str(row[10]))
                         
                         # With Mention
                         #api.update_status(tweet + '#salvini #salviniflames @matteosalvinimi ' 'https://twitter.com/matteosalvinimi/status/' + str(row[10]))
+                       
+                        # Witouth Link
+                        api.update_status(tweet)
+
                         w.write( str(tweet) + ' ' )
                         w.write('\t' + 'https://twitter.com/matteosalvinimi/status/' + str(row[10]) + ' \n') 
                         print('Tweeted:    ', tweet + '////  https://twitter.com/matteosalvinimi/status/' + str(row[10]) )
