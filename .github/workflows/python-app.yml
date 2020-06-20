@@ -38,7 +38,10 @@ jobs:
     - name: push
       uses: github-actions-x/commit@v2.6
       with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           push-branch: master
-          commit-message: 'update tsv'
-
+          author_name: Giacomo Nanni Bot
+          author_email: gn.nanni@gmail.com
+          message: 'update tsv'
+          add: "*.tsv"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
