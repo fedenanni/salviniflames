@@ -35,10 +35,9 @@ jobs:
         TWITTER_TOKEN_SECRET: ${{ secrets.TWITTER_TOKEN_SECRET }}
       run: |
           python parse.py    
-    - name: push
-      uses: github-actions-x/commit@v2.6
+    - name: Commit changes
+      uses: EndBug/add-and-commit@v4
       with:
-          push-branch: master
           author_name: Giacomo Nanni Bot
           author_email: gn.nanni@gmail.com
           message: 'update tsv'
