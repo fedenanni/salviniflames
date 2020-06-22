@@ -68,8 +68,8 @@ w = open('salvinisays.tsv', 'a')
 f = open('salvinisays.tsv', 'r')
 lines = f.readlines()
 
-print('PATH')
-os.path.abspath('salvinisays.tsv') # absolute file path
+print('PATH', os.path.abspath('salvinisays.py')) # absolute file path
+
 
 for i in range(300, 360):
     time.sleep(2)
