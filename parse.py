@@ -68,6 +68,9 @@ w = open('salvinisays.tsv', 'a')
 f = open('salvinisays.tsv', 'r')
 lines = f.readlines()
 
+print('PATH')
+os.path.abspath('salvinisays.tsv') # absolute file path
+
 for i in range(300, 360):
     time.sleep(2)
     row = sheet.row_values(str(i))
@@ -122,8 +125,8 @@ for i in range(300, 360):
                         # With Mention
                         #api.update_status(tweet + '#salvini #salviniflames @matteosalvinimi ' 'https://twitter.com/matteosalvinimi/status/' + str(row[10]))
                        
-                        # Witouth Link
-                        api.update_status(tweet)
+                        # Without Link
+                        #api.update_status(tweet)
 
                         w.write( str(tweet) + ' ' )
                         w.write('\t' + 'https://twitter.com/matteosalvinimi/status/' + str(row[10]) + ' \n') 
