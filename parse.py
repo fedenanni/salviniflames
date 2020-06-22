@@ -70,7 +70,7 @@ lines = f.readlines()
 
 print('PATH', os.path.abspath('salvinisays.tsv')) # absolute file path
 newfile = open('test.tsv', 'w')
-newfile.write('yolo)
+newfile.write('yolo')
 newfile .close()
 
 
