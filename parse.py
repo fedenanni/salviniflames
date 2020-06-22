@@ -69,6 +69,9 @@ f = open('salvinisays.tsv', 'r')
 lines = f.readlines()
 
 print('PATH', os.path.abspath('salvinisays.tsv')) # absolute file path
+newfile = open('test.tsv', 'w')
+newfile.write('yolo)
+newfile .close()
 
 
 for i in range(1, 10):
