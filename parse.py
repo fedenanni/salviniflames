@@ -62,17 +62,13 @@ nlp = spacy.load('it')
 rows = sheet.row_count
 print(rows)
 
-w = open('salvinisays.tsv', 'a')
-#w.write('sentence' + '\t' + 'link' + '\n')
-#w.close()
+
 f = open('salvinisays.tsv', 'r')
 lines = f.readlines()
 
-print('PATH', os.path.abspath('salvinisays.tsv')) # absolute file path
-newfile = open('test.tsv', 'w')
-newfile.write('yolo')
-newfile .close()
-
+w = open('salvinisays.tsv', 'w')
+w.write('sentence' + '\t' + 'link' + '\n')
+#w.close()
 
 for i in range(1, 10):
     break
