@@ -68,10 +68,11 @@ w = open('salvinisays.tsv', 'a')
 f = open('salvinisays.tsv', 'r')
 lines = f.readlines()
 
-print('PATH', os.path.abspath('salvinisays.py')) # absolute file path
+print('PATH', os.path.abspath('salvinisays.tsv')) # absolute file path
 
 
-for i in range(300, 360):
+for i in range(1, 10):
+    break
     time.sleep(2)
     row = sheet.row_values(str(i))
     sentence = row[2]
