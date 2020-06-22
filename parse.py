@@ -68,10 +68,8 @@ lines = f.readlines()
 
 w = open('salvinisays.tsv', 'w')
 w.write('sentence' + '\t' + 'link' + '\n')
-#w.close()
 
-for i in range(1, 10):
-    break
+for i in range(1, 100):
     time.sleep(2)
     row = sheet.row_values(str(i))
     sentence = row[2]
