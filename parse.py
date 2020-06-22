@@ -124,7 +124,7 @@ for i in range(1, 100):
                         #api.update_status(tweet + '#salvini #salviniflames @matteosalvinimi ' 'https://twitter.com/matteosalvinimi/status/' + str(row[10]))
                        
                         # Without Link
-                        #api.update_status(tweet)
+                        api.update_status(tweet)
 
                         w.write( str(tweet) + ' ' )
                         w.write('\t' + 'https://twitter.com/matteosalvinimi/status/' + str(row[10]) + ' \n') 
