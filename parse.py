@@ -1,16 +1,9 @@
+# Import Google Spreadsheet
 import gspread
 from google.oauth2.service_account import Credentials
-import re
-import nltk
-import spacy
-import time
-import tweepy
-import os
-nltk.download('punkt')
-
 scope = ['https://spreadsheets.google.com/feeds',
          'https://www.googleapis.com/auth/drive']
-credentials = Credentials.from_service_account_file('sheet-274815-b5805997d72c.json', scopes=scope)
+credentials = Credentials.from_service_account_file('**********.json', scopes=scope)
 gc = gspread.authorize(credentials)
 sh = gc.open_by_url('https://docs.google.com/spreadsheets/d/1TjRUke8rh-ohRE6b0IPcTffGHGl4HIQZXUUYYAehz0o/edit?usp=sharing')
 worksheet_list = sh.worksheets()
@@ -50,9 +43,15 @@ dict_based_sent("Bimbi, anziani e famiglie messe in attesa, priorità alle sanat
 
 # Parse Spreadsheet and tweet
 
+import re
+import nltk
+import spacy
+import time
+import tweepy
+
 # Authenticate to Twitter
-auth = tweepy.OAuthHandler(os.environ['TWITTER_API_KEY'], os.environ['TWITTER_API_SECRET'])
-auth.set_access_token(os.environ['TWITTER_TOKEN'], os.environ['TWITTER_TOKEN_SECRET'])
+auth = tweepy.OAuthHandler("*****", "*****")
+auth.set_access_token("*****", "*****")
 
 # Create API object
 api = tweepy.API(auth)
@@ -62,14 +61,13 @@ nlp = spacy.load('it')
 rows = sheet.row_count
 print(rows)
 
-
+w = open('salvinisays.tsv', 'a')
+#w.write('sentence' + '\t' + 'link' + '\n')
+#w.close()
 f = open('salvinisays.tsv', 'r')
 lines = f.readlines()
 
-w = open('salvinisays.tsv', 'w')
-w.write('sentence' + '\t' + 'link' + '\n')
-
-for i in range(1, 50):
+for i in range(1, 100):
     time.sleep(2)
     row = sheet.row_values(str(i))
     sentence = row[2]
@@ -118,18 +116,21 @@ for i in range(1, 50):
 
                     if isTweeted == False:
                         # Without Mention
-                        #api.update_status(tweet + ' https://twitter.com/matteosalvinimi/status/' + str(row[10]))
-                        
-                        # With Mention
-                        #api.update_status(tweet + '#salvini #salviniflames @matteosalvinimi ' 'https://twitter.com/matteosalvinimi/status/' + str(row[10]))
-                       
-                        # Without Link
-                        api.update_status(tweet)
+                        try:
+                            api.update_status(tweet + ' https://twitter.com/matteosalvinimi/status/' + str(row[10]))
+                            # With Mention
+                            #api.update_status(tweet + '#salvini #salviniflames @matteosalvinimi ' 'https://twitter.com/matteosalvinimi/status/' + str(row[10]))
+                            w.write( str(tweet) + ' ' )
+                            w.write('\t' + 'https://twitter.com/matteosalvinimi/status/' + str(row[10]) + ' \n') 
+                            print('Tweeted:    ', tweet + '////  https://twitter.com/matteosalvinimi/status/' + str(row[10]) )
+                        except tweepy.TweepError as error:
+                            if error.api_code == 187:
+                                print('duplicate message')
+                            else:
+                                raise error
 
-                        w.write( str(tweet) + ' ' )
-                        w.write('\t' + 'https://twitter.com/matteosalvinimi/status/' + str(row[10]) + ' \n') 
-                        print('Tweeted:    ', tweet + '////  https://twitter.com/matteosalvinimi/status/' + str(row[10]) )
-                        time.sleep(30)
+                    time.sleep(30)
+
                     
 print('the end')
 w.close()
