@@ -119,7 +119,7 @@ for i in range(1, 50):
                     if isTweeted == False:
                         # Without Mention
                         try:
-                            api.update_status(tweet))
+                            api.update_status(tweet)
                             # With Mention
                             #api.update_status(tweet + ' https://twitter.com/matteosalvinimi/status/' + str(row[10]))
                             w.write( str(tweet) + ' ' )
