@@ -1,16 +1,23 @@
-# Import Google Spreadsheet
 import gspread
 from google.oauth2.service_account import Credentials
+import re
+import nltk
+import spacy
+import time
+import tweepy
+import os
+nltk.download('punkt')
+
 scope = ['https://spreadsheets.google.com/feeds',
          'https://www.googleapis.com/auth/drive']
-credentials = Credentials.from_service_account_file('**********.json', scopes=scope)
+credentials = Credentials.from_service_account_file('sheet-274815-b5805997d72c.json', scopes=scope)
 gc = gspread.authorize(credentials)
 sh = gc.open_by_url('https://docs.google.com/spreadsheets/d/1TjRUke8rh-ohRE6b0IPcTffGHGl4HIQZXUUYYAehz0o/edit?usp=sharing')
 worksheet_list = sh.worksheets()
 print(worksheet_list)
 sheet = worksheet_list[0]
 
-# Define a dictionary based sentiment analysis
+# Define a dictionary based sentiment analysis
 
 it_dict = {
     "abbandon":-2,"abbandonat":-2,"rapit":2,"abduzion":-2,"rapiment":2,"aborrir":-3,"aborrit":-3,"aberrant":-3,"aborrisc":-3,"abilità":2,"capacità":2,"bord":1,"assent":-1,"assolver":2,"assolt":2,"assolv":2,"assolvend":2,"assorbit":1,"abus":-3,"abusat":-3,"abusiv":-3,"accett":1,"accettat":1,"accettand":1,"incident":-2,"accidental":-2,"accidentalment":-2,"realizzar":2,"compiut":2,"comp":2,"accus":-1,"accusar":-2,"accusat":-2,"accusand":-2,"mal":-2,"realizzabil":1,"dolorant":-2,"acrimonious":-3,"attiv":1,"adeguat":1,"ammirar":3,"ammirat":3,"ammir":3,"ammirand":3,"ammetter":-1,
@@ -43,15 +50,9 @@ dict_based_sent("Bimbi, anziani e famiglie messe in attesa, priorità alle sanat
 
 # Parse Spreadsheet and tweet
 
-import re
-import nltk
-import spacy
-import time
-import tweepy
-
 # Authenticate to Twitter
-auth = tweepy.OAuthHandler("*****", "*****")
-auth.set_access_token("*****", "*****")
+auth = tweepy.OAuthHandler(os.environ['TWITTER_API_KEY'], os.environ['TWITTER_API_SECRET'])
+auth.set_access_token(os.environ['TWITTER_TOKEN'], os.environ['TWITTER_TOKEN_SECRET'])
 
 # Create API object
 api = tweepy.API(auth)
@@ -61,13 +62,14 @@ nlp = spacy.load('it')
 rows = sheet.row_count
 print(rows)
 
-w = open('salvinisays.tsv', 'a')
-#w.write('sentence' + '\t' + 'link' + '\n')
-#w.close()
+
 f = open('salvinisays.tsv', 'r')
 lines = f.readlines()
 
-for i in range(1, 100):
+w = open('salvinisays.tsv', 'w')
+w.write('sentence' + '\t' + 'link' + '\n')
+
+for i in range(1, 50):
     time.sleep(2)
     row = sheet.row_values(str(i))
     sentence = row[2]
