@@ -95,7 +95,7 @@ for i in range(1, 50):
                             continue
                             
                     # skip links, hashtags and specific mentions
-                    if 'http' in str(children) or '#' in str(children)  or ' io,' in str(children) or 'salvini' in str(children) or "dall'" in str(children) or "dell'" in str(children) :
+                    if 'http' in str(children) or ' lega,' in str(children or '#' in str(children)  or ' io,' in str(children) or 'salvini' in str(children) or "dall'" in str(children) or "dell'" in str(children) :
                         continue
                     
                     tweet = ''
